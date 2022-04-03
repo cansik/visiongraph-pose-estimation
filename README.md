@@ -1,4 +1,4 @@
-# VisionGraph Pose-Estimator (vgparse)
+# VisionGraph Pose-Estimator (vgpose)
 A visiongraph based pose estimator example with performance profiling.
 
 ## Installation

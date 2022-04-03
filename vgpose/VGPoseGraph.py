@@ -2,6 +2,8 @@ from argparse import ArgumentParser, Namespace
 
 import cv2
 import visiongraph as vg
+from rich.console import Console
+from rich.live import Live
 
 
 class VGPoseGraph(vg.BaseGraph):
@@ -15,6 +17,16 @@ class VGPoseGraph(vg.BaseGraph):
         self.performance_profiling = False
 
         self.add_nodes(self.input, self.network)
+
+        self.console = Console()
+        self.console.print("VisionGraph Pose", style="bold green")
+
+        self.fps_field = Live(console=self.console)
+
+    def _init(self):
+        with self.console.status("Starting pipeline..."):
+            super()._init()
+        self.fps_field.start()
 
     def _process(self):
         ts, frame = self.input.read()
@@ -36,9 +48,13 @@ class VGPoseGraph(vg.BaseGraph):
             cv2.imshow("Pose Estimator", frame)
             if cv2.waitKey(15) & 0xFF == 27:
                 self.close()
-        else:
-            print("\033[K", end='')
-            print("FPS: %.0f" % self.fps_tracer.smooth_fps)
+
+        self.fps_field.update("FPS: %.0f" % self.fps_tracer.smooth_fps)
+
+    def _release(self):
+        self.fps_field.stop()
+        with self.console.status("Stopping pipeline..."):
+            super()._release()
 
     @staticmethod
     def add_params(parser: ArgumentParser):
