@@ -36,6 +36,9 @@ class VGPoseGraph(vg.BaseGraph):
 
     def _init(self):
         with self.console.status("Starting pipeline..."):
+            if isinstance(self.network, vg.OpenVinoPoseEstimator):
+                self.network.device = vg.get_inference_engine_device()
+
             if self.performance_profiling and isinstance(self.input, vg.VideoCaptureInput):
                 self.input.fps_lock = False
 
