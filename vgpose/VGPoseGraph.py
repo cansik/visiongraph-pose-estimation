@@ -55,12 +55,12 @@ class VGPoseGraph(vg.BaseGraph):
         results = self.network.process(frame)
         self.process_watch.stop()
 
-        for result in results:
-            result.annotate(frame, min_score=0.1)
-
         self.fps_tracer.update()
 
         if not self.performance_profiling:
+            for result in results:
+                result.annotate(frame, min_score=0.1)
+
             cv2.putText(frame, "FPS: %.0f" % self.fps_tracer.smooth_fps,
                         (7, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 2, cv2.LINE_AA)
 
