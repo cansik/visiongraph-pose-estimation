@@ -4,12 +4,15 @@ import cv2
 import visiongraph as vg
 from rich.console import Console
 from rich.live import Live
+from rich.padding import Padding
+from rich.panel import Panel
+from rich.text import Text
 
 
 class VGPoseGraph(vg.BaseGraph):
 
     def __init__(self, input: vg.BaseInput, pose_network: vg.PoseEstimator):
-        super().__init__()
+        super().__init__(handle_signals=True)
         self.input = input
         self.network = pose_network
         self.fps_tracer = vg.FPSTracer()
@@ -19,14 +22,18 @@ class VGPoseGraph(vg.BaseGraph):
         self.add_nodes(self.input, self.network)
 
         self.console = Console()
-        self.console.print("VisionGraph Pose", style="bold green")
+        self.console.print("VisionGraph Pose Estimation", style="bold green")
 
-        self.fps_field = Live(console=self.console)
+        self.live_field = Live(console=self.console, screen=False)
+        self.panel = Panel("",
+                           title="VisionGraph Pose Estimation",
+                           title_align="left",
+                           padding=1)
 
     def _init(self):
         with self.console.status("Starting pipeline..."):
             super()._init()
-        self.fps_field.start()
+        self.live_field.start()
 
     def _process(self):
         ts, frame = self.input.read()
@@ -49,10 +56,15 @@ class VGPoseGraph(vg.BaseGraph):
             if cv2.waitKey(15) & 0xFF == 27:
                 self.close()
 
-        self.fps_field.update("FPS: %.0f" % self.fps_tracer.smooth_fps)
+        text = Text()
+        text.append("FPS: ")
+        text.append(f"{self.fps_tracer.smooth_fps:.1f}", style="bold magenta")
+
+        self.panel.renderable = text
+        self.live_field.update(Padding(self.panel, 1))
 
     def _release(self):
-        self.fps_field.stop()
+        self.live_field.stop()
         with self.console.status("Stopping pipeline..."):
             super()._release()
 
