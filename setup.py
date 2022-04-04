@@ -20,6 +20,6 @@ setup(
     license='MIT License',
     author='Florian Bruggisser',
     author_email='github@broox.ch',
-    description='A visiongraph based pose estimator example with performance profiling.',
+    description='A visiongraph based pose estimator example with performance measurement.',
     install_requires=required,
 )
