@@ -1,5 +1,5 @@
-# VisionGraph Pose Estimation (vgpose)
-A visiongraph based pose estimator example with performance profiling. The idea behind this example is to show the performance of the various pose estimation networks implement in visiongraph.
+# VisionGraph Pose Estimation Example
+A visiongraph based pose estimator example with performance measurement. The idea behind this example is to show the performance of the various pose estimation networks implemented in visiongraph.
 
 <img width="844" alt="image" src="https://user-images.githubusercontent.com/5220162/161503541-e882b0f3-8428-41a3-96c7-a996d66c39ba.png">
 

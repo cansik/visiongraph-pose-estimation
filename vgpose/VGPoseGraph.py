@@ -1,4 +1,5 @@
 from argparse import ArgumentParser, Namespace
+from typing import List
 
 import cv2
 import visiongraph as vg
@@ -62,10 +63,10 @@ class VGPoseGraph(vg.BaseGraph):
 
         if not self.performance_profiling:
             for result in results:
-                result.annotate(frame, min_score=0.1)
+                result.annotate(frame, min_score=0.1, show_bounding_box=False)
 
             cv2.putText(frame, "FPS: %.0f" % self.fps_tracer.smooth_fps,
-                        (7, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 2, cv2.LINE_AA)
+                        (7, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (128, 128, 128), 2, cv2.LINE_AA)
 
             cv2.imshow("Pose Estimator", frame)
             if cv2.waitKey(15) & 0xFF == 27:
