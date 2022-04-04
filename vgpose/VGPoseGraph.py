@@ -2,7 +2,7 @@ from argparse import ArgumentParser, Namespace
 
 import cv2
 import visiongraph as vg
-from rich.console import Console
+from rich.console import Console, Group
 from rich.live import Live
 from rich.padding import Padding
 from rich.panel import Panel
@@ -70,6 +70,8 @@ class VGPoseGraph(vg.BaseGraph):
 
         self.total_watch.stop()
 
+        h, w = frame.shape[:2]
+
         text = Text(justify="center")
         text.append("Input")
         text.append("(ms)", style="italic")
@@ -90,6 +92,7 @@ class VGPoseGraph(vg.BaseGraph):
         text.append(f"{self.fps_tracer.smooth_fps:.1f}", style="bold magenta")
 
         self.panel.renderable = text
+        self.panel.subtitle = f"{type(self.network).__name__} ({h} x {w})"
         self.live_field.update(Padding(self.panel, 1))
 
     def _release(self):
@@ -106,5 +109,3 @@ class VGPoseGraph(vg.BaseGraph):
         super().configure(args)
 
         self.performance_profiling = args.performance
-
-
