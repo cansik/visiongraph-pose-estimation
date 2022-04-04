@@ -47,7 +47,8 @@ mediapipe
 mediapipe-light
 mediapipe-heavy
 
-movenet,movenet-192
+movenet
+movenet-192
 
 openpose
 openpose-int8
