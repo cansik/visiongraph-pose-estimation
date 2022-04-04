@@ -1,4 +1,4 @@
-# VisionGraph Pose-Estimator (vgpose)
+# VisionGraph PoseEstimation (vgpose)
 A visiongraph based pose estimator example with performance profiling. The idea behind this example is to show the performance of the various pose estimation networks implement in visiongraph.
 
 <img width="844" alt="image" src="https://user-images.githubusercontent.com/5220162/161503541-e882b0f3-8428-41a3-96c7-a996d66c39ba.png">
@@ -56,6 +56,10 @@ aepose-448-fp32
 ```
 vgpose --pose-estimator aepose
 ```
+
+### Performance
+
+By default, the predicted pose estimation is annotated on the input frame and shown with OpenCV's imshow. This can be slow and for real performance testing it is recommended to add the `--performance` argument. This removes the annotation and showing of the frame and shows what the framework is capable of.
 
 ## Help
 
