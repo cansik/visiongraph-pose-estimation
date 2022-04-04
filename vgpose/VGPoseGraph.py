@@ -17,9 +17,13 @@ class VGPoseGraph(vg.BaseGraph):
         self.network = pose_network
         self.fps_tracer = vg.FPSTracer()
 
+        self.add_nodes(self.input, self.network)
+
         self.performance_profiling = False
 
-        self.add_nodes(self.input, self.network)
+        self.input_watch = vg.ProfileWatch()
+        self.process_watch = vg.ProfileWatch()
+        self.total_watch = vg.ProfileWatch()
 
         self.console = Console()
         self.console.print("VisionGraph Pose Estimation", style="bold green")
@@ -32,16 +36,24 @@ class VGPoseGraph(vg.BaseGraph):
 
     def _init(self):
         with self.console.status("Starting pipeline..."):
+            if self.performance_profiling and isinstance(self.input, vg.VideoCaptureInput):
+                self.input.fps_lock = False
+
             super()._init()
         self.live_field.start()
 
     def _process(self):
+        self.total_watch.start()
+        self.input_watch.start()
         ts, frame = self.input.read()
+        self.input_watch.stop()
 
         if frame is None:
             return
 
+        self.process_watch.start()
         results = self.network.process(frame)
+        self.process_watch.stop()
 
         for result in results:
             result.annotate(frame, min_score=0.1)
@@ -56,7 +68,24 @@ class VGPoseGraph(vg.BaseGraph):
             if cv2.waitKey(15) & 0xFF == 27:
                 self.close()
 
-        text = Text()
+        self.total_watch.stop()
+
+        text = Text(justify="center")
+        text.append("Input")
+        text.append("(ms)", style="italic")
+        text.append(": ")
+        text.append(f"{self.input_watch.average():.1f}", style="bold cyan")
+        text.append("    ")
+        text.append("Estimation")
+        text.append("(ms)", style="italic")
+        text.append(": ")
+        text.append(f"{self.process_watch.average():.1f}", style="bold yellow")
+        text.append("    ")
+        text.append("Total")
+        text.append("(ms)", style="italic")
+        text.append(": ")
+        text.append(f"{self.total_watch.average():.1f}", style="bold magenta")
+        text.append("    ")
         text.append("FPS: ")
         text.append(f"{self.fps_tracer.smooth_fps:.1f}", style="bold magenta")
 
