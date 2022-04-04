@@ -1,9 +1,14 @@
 # VisionGraph Pose Estimation Example
 A visiongraph based pose estimator example with performance measurement. The idea behind this example is to show the performance of the various pose estimation networks implemented in visiongraph.
 
+![pose-example](https://user-images.githubusercontent.com/5220162/161539415-e8b05ed7-dbb7-4aa3-876a-c3b59acb9112.jpg)
+*Pose estimation example ([Image Source](https://www.pexels.com/photo/people-posing-at-the-camera-5319298/))*
+
+The software uses a console as UI to render information about the latency and current FPS.
+
 <img width="844" alt="image" src="https://user-images.githubusercontent.com/5220162/161503541-e882b0f3-8428-41a3-96c7-a996d66c39ba.png">
 
-*Terminal ui of vgpose.*
+*Terminal UI of vgpose*
 
 ## Installation
 
