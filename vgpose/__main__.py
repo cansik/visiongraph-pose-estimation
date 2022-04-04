@@ -17,7 +17,7 @@ def main():
 
 
 def parse_args():
-    parser = argparse.ArgumentParser("VisionGraph Pose Estimation Example", description="Example Pipeline")
+    parser = argparse.ArgumentParser("vgpose", description="Example Pipeline")
     vg.add_logging_parameter(parser)
 
     VGPoseGraph.add_params(parser)
