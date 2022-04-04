@@ -1,4 +1,4 @@
 --find-links https://github.com/cansik/data-storage/releases/tag/packages
 
-visiongraph[realsense, azure, mediapipe, openvino]>=0.1.19
+visiongraph[realsense, azure, mediapipe, openvino]>=0.1.20
 rich
