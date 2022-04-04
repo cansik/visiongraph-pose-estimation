@@ -1,9 +1,9 @@
-# VisionGraph PoseEstimation (vgpose)
+# VisionGraph Pose Estimation (vgpose)
 A visiongraph based pose estimator example with performance profiling. The idea behind this example is to show the performance of the various pose estimation networks implement in visiongraph.
 
 <img width="844" alt="image" src="https://user-images.githubusercontent.com/5220162/161503541-e882b0f3-8428-41a3-96c7-a996d66c39ba.png">
 
-*Terminal UI of VGPose*
+*Terminal ui of vgpose.*
 
 ## Installation
 
@@ -52,6 +52,8 @@ aepose
 aepose-288-fp16
 aepose-448-fp32
 ```
+
+This is an example on how to use aepose as pose estimator:
 
 ```
 vgpose --pose-estimator aepose
