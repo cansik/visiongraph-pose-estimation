@@ -1,0 +1,9 @@
+--find-links https://github.com/cansik/openvino-arm/releases/tag/2022.1.0
+--find-links https://github.com/cansik/data-storage/releases/tag/packages
+
+visiongraph
+
+openvino-arm; platform_system == "Darwin" and platform.machine == 'arm64'
+openvino; platform_system != "Darwin" and platform.machine != 'arm64'
+
+git+https://github.com/cansik/visiongraph-pose-estimator.git

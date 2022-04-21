@@ -2,8 +2,6 @@
 --find-links https://github.com/cansik/openvino-arm/releases/tag/2022.1.0
 --find-links https://github.com/cansik/mediapipe-silicon/releases/tag/v0.8.9
 
-numpy==1.22.3
-
 openvino-arm; platform_system == "Darwin" and platform.machine == 'arm64'
 openvino; platform_system != "Darwin" and platform.machine != 'arm64'
 

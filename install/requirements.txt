@@ -1,0 +1,15 @@
+--find-links https://github.com/cansik/mediapipe-silicon/releases/tag/v0.8.9
+
+wheel
+numpy
+scipy
+opencv-python>=4.5.4.60
+vector>=0.8.5
+requests
+tqdm
+filterpy
+rich
+pyrealsense2-macosx
+
+mediapipe-silicon; platform_system == "Darwin" and platform.machine == 'arm64'
+mediapipe; platform_system != "Darwin" and platform.machine != 'arm64'
