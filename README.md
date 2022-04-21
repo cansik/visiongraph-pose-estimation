@@ -24,6 +24,13 @@ If you are going to develop based on this project, please install the necessary 
 pip install --use-deprecated=legacy-resolver -r requirements.txt
 ```
 
+### Pip ContextualVersionConflict
+If you experience a `ContextualVersionConflict` please use the following installation method which installs the packages without dependencies.
+
+```
+pip install -r https://raw.githubusercontent.com/cansik/visiongraph-pose-estimation/main/install/requirements.txt
+pip install --no-deps -r https://raw.githubusercontent.com/cansik/visiongraph-pose-estimation/main/install/requirements-no-deps.txt
+```
 
 ## Usage
 
