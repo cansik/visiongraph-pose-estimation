@@ -1,9 +1,8 @@
 from argparse import ArgumentParser, Namespace
-from typing import List
 
 import cv2
 import visiongraph as vg
-from rich.console import Console, Group
+from rich.console import Console
 from rich.live import Live
 from rich.padding import Padding
 from rich.panel import Panel

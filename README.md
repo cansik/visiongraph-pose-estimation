@@ -15,21 +15,13 @@ The software uses a console as UI to render information about the latency and cu
 To get vgpose up and running we recommend to install the following command into a fresh [virtual-env](https://docs.python.org/3/library/venv.html). This will install all the dependencies and creates a script reference with the alias `vgpose` to run the example.
 
 ```
-pip install --use-deprecated=legacy-resolver git+https://github.com/cansik/visiongraph-pose-estimator.git --find-links https://github.com/cansik/data-storage/releases/tag/packages --find-links https://github.com/cansik/openvino-arm/releases/tag/2022.1.0 --find-links https://github.com/cansik/mediapipe-silicon/releases/tag/v0.8.9
+pip install git+https://github.com/cansik/visiongraph-pose-estimator.git
 ```
 
 If you are going to develop based on this project, please install the necessary requirements directly from the `requirements.txt`.
 
 ```
-pip install --use-deprecated=legacy-resolver -r requirements.txt
-```
-
-### Pip ContextualVersionConflict
-If you experience a `ContextualVersionConflict` please use the following installation method which installs the packages without dependencies.
-
-```
-pip install -r https://raw.githubusercontent.com/cansik/visiongraph-pose-estimation/main/install/requirements.txt
-pip install --no-deps -r https://raw.githubusercontent.com/cansik/visiongraph-pose-estimation/main/install/requirements-no-deps.txt
+pip install -r requirements.txt
 ```
 
 ## Usage
